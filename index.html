@@ -1,0 +1,61 @@
+<html ng-app>
+<head>
+<script src="lib/sockjs-0.3.min.js"></script>
+<script src="lib/angular-1.0.4.min.js"></script>
+
+<!-- Bootstrap + Angular sidonnat -->
+
+<script src="lib/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+<script src="lib/ui-bootstrap-tpls.min.js"></script>
+
+<script>
+    //var sock = new SockJS('http://192.168.0.74:9999/chat');
+    var sock = new SockJS('http://localhost:9999/chat');
+    function ChatCtrl($scope) {
+        // Msg
+        $scope.messages = [];
+        $scope.sendMessage = function() {
+		var msg = new Object();
+		msg.user = "test";
+		msg.data = $scope.messageText;
+            //sock.send(angular.toJson(msg));
+            sock.send($scope.messageText);
+            $scope.messageText = "";
+        };
+
+        sock.onmessage = function(e) {
+            $scope.messages.push(e.data);
+            $scope.$apply();
+        };
+    }
+</script>
+
+<link rel="stylesheet" href="lib/bootstrap-3.1.1-dist/css/bootstrap-theme.css" type="text/css"/>
+<link rel="stylesheet" href="lib/bootstrap-3.1.1-dist/css/bootstrap.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="css/client.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome-4.1.0/css/font-awesome.css"/>
+
+</head>
+
+<body>
+
+
+<img src="css/arcusys-grey-logo.svg" class="logo"/>
+
+<h1>Chat - devday</h1>
+
+<div ng-controller="ChatCtrl">
+    <ul>
+        <li ng-repeat="message in messages">{{message}}</li>
+    </ul>
+
+    <form ng-submit="sendMessage()">
+        <input type="text" ng-model="messageText" placeholder="Type your message here" />
+        <button type="submit" class="btn btn-primary">
+        <i class="fa fa-send"></i> 
+	</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "obfuschat",
+  "version": "0.0.1",
+  "description": "Obfuscated Chat",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cheets/obfuschat.git"
+  },
+  "keywords": [
+    "nodejs",
+    "chat"
+  ],
+  "author": "Arcusys DevDay14 group",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cheets/obfuschat/issues"
+  },
+  "homepage": "https://github.com/cheets/obfuschat"
+}
