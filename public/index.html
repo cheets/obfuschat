@@ -10,8 +10,8 @@
 <script src="lib/ui-bootstrap-tpls.min.js"></script>
 
 <script>
-    //var sock = new SockJS('http://obfuschat.herokuapp.com:9999/chat');
-    var sock = new SockJS('http://localhost:9999/chat');
+    var sock = new SockJS('http://obfuschat.herokuapp.com/chat');
+    //var sock = new SockJS('http://localhost:9999/chat');
     function ChatCtrl($scope) {
         // Msg
         $scope.messages = [];
