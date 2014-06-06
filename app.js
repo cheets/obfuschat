@@ -3,12 +3,25 @@ var http = require('http');
 var sockjs = require('sockjs');
 
 var connections = [];
+var numbers = [];
 
 var chat = sockjs.createServer();
 chat.on('connection', function(conn) {
     connections.push(conn);
-    var number = connections.length;
+    var number;
+    var i = 1;
+    
+    while(true) {
+    	if(numbers.indexOf(i) == -1) {
+    		number = i
+    		numbers.push(i);
+    		break;
+    	}
+    	i++;
+    }
+    
     conn.write("Welcome, User " + number);
+    console.log("Users connected: " + connections.length);
     conn.on('data', function(message) {
         for (var ii=0; ii < connections.length; ii++) {
             connections[ii].write("User " + number + " says: " + message);
@@ -18,6 +31,11 @@ chat.on('connection', function(conn) {
         for (var ii=0; ii < connections.length; ii++) {
             connections[ii].write("User " + number + " has disconnected");
         }
+        var index = connections.indexOf(conn);
+        connections.splice(index, 1);
+        numbers.splice(index, 1);
+        
+   		console.log("Someone disconnected, now connected: " + connections.length);
     });
 });
 
