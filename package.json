@@ -19,5 +19,8 @@
   "homepage": "https://github.com/cheets/obfuschat",
   "dependencies": {
     "sockjs": "^0.3.9"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
