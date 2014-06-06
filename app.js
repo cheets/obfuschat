@@ -1,3 +1,4 @@
+var express = require('express');
 var http = require('http');
 var sockjs = require('sockjs');
 
@@ -20,8 +21,11 @@ chat.on('connection', function(conn) {
     });
 });
 
-var server = http.createServer();
-var port = 9999;
+
+var app = express();
+app.set('port', process.env.PORT || 9999);
+app.use('/', express.static(__dirname + '/public'));
+var server = http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
 chat.installHandlers(server, {prefix:'/chat'});
-console.log("Using port " + port)
-server.listen(port, '0.0.0.0');

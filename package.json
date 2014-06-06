@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/cheets/obfuschat",
   "dependencies": {
+    "express": "^4.4.1",
     "sockjs": "^0.3.9"
   },
   "engines": {

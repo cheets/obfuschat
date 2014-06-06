@@ -2,6 +2,7 @@
 <head>
 <script src="lib/sockjs-0.3.min.js"></script>
 <script src="lib/angular-1.0.4.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <!-- Bootstrap + Angular sidonnat -->
 
@@ -9,15 +10,15 @@
 <script src="lib/ui-bootstrap-tpls.min.js"></script>
 
 <script>
-    //var sock = new SockJS('http://192.168.0.74:9999/chat');
+    //var sock = new SockJS('http://obfuschat.herokuapp.com:9999/chat');
     var sock = new SockJS('http://localhost:9999/chat');
     function ChatCtrl($scope) {
         // Msg
         $scope.messages = [];
         $scope.sendMessage = function() {
-		var msg = new Object();
-		msg.user = "test";
-		msg.data = $scope.messageText;
+        var msg = new Object();
+        msg.user = "test";
+        msg.data = $scope.messageText;
             //sock.send(angular.toJson(msg));
             sock.send($scope.messageText);
             $scope.messageText = "";
@@ -52,7 +53,7 @@
     <form ng-submit="sendMessage()">
         <input type="text" ng-model="messageText" placeholder="Type your message here" />
         <button type="submit" class="btn btn-primary">
-        <i class="fa fa-send"></i> 
+        <i class="fa fa-send"></i>
 	</button>
     </form>
 </div>
