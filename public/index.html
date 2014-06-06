@@ -43,18 +43,19 @@
 
 <img src="css/arcusys-grey-logo.svg" class="logo"/>
 
-<h1>Chat - devday</h1>
+<div ng-controller="ChatCtrl" class="container">
 
-<div ng-controller="ChatCtrl">
-    <ul>
+    <h1>Image says more then 1K words</h1>
+
+    <ul class="message-frame">
         <li ng-repeat="message in messages">{{message}}</li>
     </ul>
 
     <form ng-submit="sendMessage()">
-        <input type="text" ng-model="messageText" placeholder="Type your message here" />
-        <button type="submit" class="btn btn-primary">
-        <i class="fa fa-send"></i>
-	</button>
+        <div class="form-group">
+            <input type="text" ng-model="messageText" placeholder="Type your message here" />
+            <button type="submit" class="btn btn-primary"><i class="fa fa-picture-o"></i></button>
+        </div>
     </form>
 </div>
 
