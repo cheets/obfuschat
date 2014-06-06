@@ -15,6 +15,7 @@
     function ChatCtrl($scope) {
         // Msg
         $scope.messages = [];
+        $scope.disconnected = "true";
         $scope.sendMessage = function() {
         var msg = new Object();
         msg.user = "test";
@@ -23,6 +24,14 @@
             sock.send($scope.messageText);
             $scope.messageText = "";
         };
+
+	$scope.disconnectUser = function() {
+        	sock.close();
+        	$scope.disconnected = "false";
+        	$scope.messages.push("You have been disconnected from the server.");
+            $scope.$apply();
+        }
+
 
         sock.onmessage = function(e) {
             $scope.messages.push(e.data);
@@ -50,11 +59,10 @@
         <li ng-repeat="message in messages">{{message}}</li>
     </ul>
 
-    <form ng-submit="sendMessage()">
+    <form ng-submit="sendMessage()" ng-show="disconnected" >
         <input type="text" ng-model="messageText" placeholder="Type your message here" />
-        <button type="submit" class="btn btn-primary">
-        <i class="fa fa-send"></i>
-	</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i></button>
+        <button class="btn btn-primary" ng-click="disconnectUser()">Disconnect</button>
     </form>
 </div>
 
